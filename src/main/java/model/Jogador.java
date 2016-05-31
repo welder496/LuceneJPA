@@ -26,5 +26,29 @@ public class Jogador {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public float getAtual() {
+		return atual;
+	}
+
+	public void setAtual(float atual) {
+		this.atual = atual;
+	}
+
+	public float getUltima() {
+		return ultima;
+	}
+
+	public void setUltima(float ultima) {
+		this.ultima = ultima;
+	}
+
+	public float getMedia() {
+		return media;
+	}
+
+	public void setMedia(float media) {
+		this.media = media;
+	}
 	
 }
