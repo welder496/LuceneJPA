@@ -4,10 +4,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 public class LuceneApplication {
 
+	static Logger log = Logger.getLogger(Logger.class);
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("config");
 	private static EntityManager em = emf.createEntityManager();
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
