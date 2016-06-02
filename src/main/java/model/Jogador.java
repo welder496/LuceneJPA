@@ -14,10 +14,6 @@ public class Jogador {
 	private String nome;
 
 	private float atual;
-	
-	private float ultima;
-	
-	private float media;
 		
 	public String getNome() {
 		return nome;
@@ -33,22 +29,6 @@ public class Jogador {
 
 	public void setAtual(float atual) {
 		this.atual = atual;
-	}
-
-	public float getUltima() {
-		return ultima;
-	}
-
-	public void setUltima(float ultima) {
-		this.ultima = ultima;
-	}
-
-	public float getMedia() {
-		return media;
-	}
-
-	public void setMedia(float media) {
-		this.media = media;
 	}
 	
 }
