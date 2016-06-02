@@ -9,6 +9,11 @@ import javax.persistence.Id;
 @Entity
 public class Jogador implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private int codigo;
