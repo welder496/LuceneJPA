@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -22,6 +24,9 @@ public class Jogador implements Serializable {
 
 	private float atual;
 		
+	@Enumerated(EnumType.STRING)
+	private JogadorInfo jogadorInfo;
+	
 	public String getNome() {
 		return nome;
 	}
