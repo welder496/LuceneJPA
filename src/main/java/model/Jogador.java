@@ -43,4 +43,12 @@ public class Jogador implements Serializable {
 		this.atual = atual;
 	}
 	
+	public void setJogadorInfo(JogadorInfo jogadorInfo){
+		this.jogadorInfo=jogadorInfo;
+	}
+	
+	public JogadorInfo getJogadorInfo(){
+		return jogadorInfo;
+	}
+	
 }
