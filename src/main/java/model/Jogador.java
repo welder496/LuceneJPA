@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,10 +21,12 @@ public class Jogador implements Serializable {
 	@GeneratedValue
 	private int codigo;
 	
+	@Column(length=60)
 	private String nome;
 
 	private float atual;
-		
+	
+	@Column(length=30)
 	@Enumerated(EnumType.STRING)
 	private JogadorInfo jogadorInfo;
 	
