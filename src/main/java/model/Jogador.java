@@ -9,7 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 @Entity
+@Indexed
 public class Jogador implements Serializable {
 
 	/**
@@ -22,11 +26,17 @@ public class Jogador implements Serializable {
 	private int codigo;
 	
 	@Column(length=60)
+	@Field
 	private String nome;
 
+	@Column(length=60)
+	@Field
+	private String time;
+	
 	private float atual;
 	
 	@Column(length=30)
+	@Field
 	@Enumerated(EnumType.STRING)
 	private JogadorInfo jogadorInfo;
 	
@@ -54,4 +64,16 @@ public class Jogador implements Serializable {
 		return jogadorInfo;
 	}
 	
+	public void setTime(String time){
+		this.time=time;
+	}
+	
+	public String getTime(){
+		return time;
+	}
+	
+	@Override
+	public String toString(){
+		return "Jogador [codigo ="+codigo+" nome="+nome+"]";
+	}
 }
