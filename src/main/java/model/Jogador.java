@@ -33,7 +33,15 @@ public class Jogador implements Serializable {
 	@Field
 	private String time;
 	
+	@Column(length=60)
+	@Field
+	private String timeAdversario;
+	
+	@Field
 	private float atual;
+	
+	@Field
+	private int rodada;
 	
 	@Column(length=30)
 	@Field
@@ -76,4 +84,21 @@ public class Jogador implements Serializable {
 	public String toString(){
 		return "Jogador [codigo ="+codigo+" nome="+nome+"]";
 	}
+
+	public String getTimeAdversario() {
+		return timeAdversario;
+	}
+
+	public void setTimeAdversario(String timeAdversario) {
+		this.timeAdversario = timeAdversario;
+	}
+
+	public int getRodada() {
+		return rodada;
+	}
+
+	public void setRodada(int rodada) {
+		this.rodada = rodada;
+	}
+
 }
