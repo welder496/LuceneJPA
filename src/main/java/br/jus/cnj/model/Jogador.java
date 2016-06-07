@@ -1,4 +1,4 @@
-package model;
+package br.jus.cnj.model;
 
 import java.io.Serializable;
 

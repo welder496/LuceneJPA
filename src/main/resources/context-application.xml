@@ -10,24 +10,15 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- Spring Component Package Scan -->
-	<context:component-scan base-package="com.cor.demo.jpa" />
-
-	<!-- Property configuration -->
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-		p:ignoreUnresolvablePlaceholders="true" p:ignoreResourceNotFound="true">
-		<property name="locations">
-			<list>
-				<value>classpath:/system.properties</value>
-			</list>
-		</property>
-	</bean>
+	<context:component-scan base-package="br.jus.cnj" />
+	
+	<context:annotation-config/>
 
 	<!-- JPA Entity Manager Factory -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<!-- <property name="packagesToScan" value="com.cor.demo.jpa.entity" /> -->
+		<!-- <property name="packagesToScan" value="model" /> -->
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />
@@ -40,7 +31,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.use_sql_comments" value="false" />
 				<entry key="hibernate.show_sql" value="false" />
-				<entry key="hibernate.search.default.indexBase" value="/var/lucene/indexes" />
+				<entry key="hibernate.search.default.indexBase" value="/var/luceneUm/indexes" />
 			</map>
 		</property>
 	</bean>
@@ -48,16 +39,17 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- JPA Data Source -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${database.driver}" />
-		<property name="url" value="${database.url}" />
-		<property name="username" value="${database.username}" />
-		<property name="password" value="${database.password}" />
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/LuceneUm" />
+		<property name="username" value="postgres" />
+		<property name="password" value="postgres" />
 	</bean>
 
 	<!-- Transaction Manager -->
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	
 	<tx:annotation-driven transaction-manager="txManager" />
 
 </beans>
