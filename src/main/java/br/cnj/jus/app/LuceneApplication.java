@@ -1,4 +1,4 @@
-package app;
+package br.cnj.jus.app;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
