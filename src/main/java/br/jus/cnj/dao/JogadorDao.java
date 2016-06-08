@@ -23,6 +23,14 @@ public class JogadorDao {
 		em.remove(jogador);
 	}
 	
+	public void deleteByName(String nome){
+		em.createQuery("Delete from Jogador j where nome=:nome").setParameter("nome",nome).executeUpdate();
+	}
+	
+	public Jogador findByName(String nome){
+		return (Jogador) em.createQuery("Select j from Jogador j where nome=:nome").setParameter("nome", nome).getSingleResult();	
+	}
+	
 	public List<Jogador> findAll() {
 		return em.createQuery("SELECT j FROM Jogador j").getResultList();
 	}

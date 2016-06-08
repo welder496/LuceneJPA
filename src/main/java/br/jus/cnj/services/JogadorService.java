@@ -25,6 +25,29 @@ public class JogadorService {
 	   jogadorDao.delete(jog);
 	}
 	
+	@Transactional
+	public void deleteJogadorByName(String nome){
+		jogadorDao.deleteByName(nome);
+	}
+	
+	@Transactional
+	public void deleteAll(){
+		List<Jogador> jogadores = jogadorDao.findAll();
+		for (Jogador jog: jogadores){
+			jogadorDao.delete(jog);
+		}
+	}
+	
+	@Transactional(readOnly = true)
+	public Jogador getJogadorByName(String nome){
+		return jogadorDao.findByName(nome);
+	}
+	
+	@Transactional
+	public void deleteByName(String nome){
+		jogadorDao.deleteByName(nome);
+	}
+	
 	@Transactional(readOnly = true)
 	public List<Jogador> listAll(){
 		return jogadorDao.findAll();

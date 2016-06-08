@@ -1,6 +1,8 @@
 package br.jus.cnj.controller;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import br.jus.cnj.model.Jogador;
 import br.jus.cnj.model.JogadorInfo;
@@ -11,6 +13,9 @@ public class JogadorControler {
 	private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 	private JogadorService jogServ = context.getBean(JogadorService.class); 
 	
+	public void deleteAllJogador(){
+		jogServ.deleteAll();
+	}
 	
 	public void addJogador(String nome, JogadorInfo info, float atual, String time, String timeAdversario, int rodada){
 		Jogador temp = new Jogador();
@@ -22,6 +27,13 @@ public class JogadorControler {
 		temp.setRodada(rodada);
 		jogServ.addJogador(temp);
 	}
+		
+	public void deleteJogadorByName(String nome){
+		jogServ.deleteByName(nome);
+	}
 	
+	public Jogador getJogadorByName(String nome){
+		return jogServ.getJogadorByName(nome);
+	}
 	
 }
