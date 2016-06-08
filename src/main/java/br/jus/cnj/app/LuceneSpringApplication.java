@@ -1,4 +1,4 @@
-package br.cnj.jus.app;
+package br.jus.cnj.app;
 
 import br.jus.cnj.controller.JogadorControler;
 import br.jus.cnj.model.Jogador;
