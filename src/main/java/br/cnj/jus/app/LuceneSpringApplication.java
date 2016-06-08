@@ -1,20 +1,25 @@
 package br.cnj.jus.app;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import br.jus.cnj.controller.JogadorControler;
 import br.jus.cnj.model.Jogador;
-import br.jus.cnj.services.JogadorService;
+import br.jus.cnj.model.JogadorInfo;
 
 
 public class LuceneSpringApplication {
 
 	public static void main(String[] args) throws Exception {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/context-application.xml");	
-		JogadorService jogServ = context.getBean(JogadorService.class);	
-        
-		jogServ.addJogador(new Jogador());
+	    JogadorControler JogCtrl = new JogadorControler();
 		
-	    context.close();
+		Jogador jog = new Jogador();
+		jog.setNome("ANDRÉ");
+		jog.setAtual(1);
+		jog.setJogadorInfo(JogadorInfo.PREVISAO);
+		jog.setTime("SANTOS");
+		jog.setRodada(7);
+		jog.setTimeAdversario("SÃO PAULO");
+		
+		JogCtrl.addJogador(jog);
+		
 	}
 
 }
