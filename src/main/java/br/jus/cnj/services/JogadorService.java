@@ -20,6 +20,11 @@ public class JogadorService {
 	   jogadorDao.persist(jog);
 	}	
 	
+	@Transactional
+	public void delete(Jogador jog){
+	   jogadorDao.delete(jog);
+	}
+	
 	@Transactional(readOnly = true)
 	public List<Jogador> listAll(){
 		return jogadorDao.findAll();

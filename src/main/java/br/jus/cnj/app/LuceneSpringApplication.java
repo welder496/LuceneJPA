@@ -9,16 +9,12 @@ public class LuceneSpringApplication {
 
 	public static void main(String[] args) throws Exception {
 	    JogadorControler JogCtrl = new JogadorControler();
-		
-		Jogador jog = new Jogador();
-		jog.setNome("ANDRÉ");
-		jog.setAtual(1);
-		jog.setJogadorInfo(JogadorInfo.PREVISAO);
-		jog.setTime("SANTOS");
-		jog.setRodada(7);
-		jog.setTimeAdversario("SÃO PAULO");
-		
-		JogCtrl.addJogador(jog);
+
+		JogCtrl.addJogador("FERNANDO MIGUEL",JogadorInfo.REAL,2.1F,"VITORIA","BOTAFOGO",7);	    
+		JogCtrl.addJogador("EDÍLSON",JogadorInfo.REAL,2.1F,"GRÊMIO","FLUMINENSE",7);	    
+		JogCtrl.addJogador("NORBERTO",JogadorInfo.REAL,2.1F,"VITORIA","BOTAFOGO",7);	    
+		JogCtrl.addJogador("DAVID BRAZ",JogadorInfo.REAL,2.1F,"SANTOS","SANTA CRUZ",7);	    
+		JogCtrl.addJogador("GUSTAVO HENRIQUE",JogadorInfo.REAL,2.1F,"SANTOS","SANTA CRUZ",7);	    
 		
 	}
 

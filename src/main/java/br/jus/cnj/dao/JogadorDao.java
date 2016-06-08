@@ -19,6 +19,10 @@ public class JogadorDao {
 		em.persist(jogador);
 	}
 	
+	public void delete(Jogador jogador){
+		em.remove(jogador);
+	}
+	
 	public List<Jogador> findAll() {
 		return em.createQuery("SELECT j FROM Jogador j").getResultList();
 	}
