@@ -9,7 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 @Entity
+@Indexed
 public class Jogador implements Serializable {
 
 	/**
@@ -21,12 +25,15 @@ public class Jogador implements Serializable {
 	@GeneratedValue
 	private int codigo;
 	
+	@Field
 	@Column(length=60)
 	private String nome;
 
+	@Field
 	@Column(length=60)
 	private String time;
 	
+	@Field
 	@Column(length=60)
 	private String timeAdversario;
 	

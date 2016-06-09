@@ -1,17 +1,22 @@
 package br.jus.cnj.controller;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
+import java.util.List;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
 import br.jus.cnj.model.Jogador;
 import br.jus.cnj.model.JogadorInfo;
+import br.jus.cnj.services.JogadorSearch;
 import br.jus.cnj.services.JogadorService;
 
 public class JogadorControler {
-
-	private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-	private JogadorService jogServ = context.getBean(JogadorService.class); 
+	
+	AnnotationConfigApplicationContext beanFactory = new AnnotationConfigApplicationContext(Config.class);
+	JogadorService jogServ = beanFactory.getBean(JogadorService.class);
+	JogadorSearch jogSearch = beanFactory.getBean(JogadorSearch.class);
 	
 	public void deleteAllJogador(){
 		jogServ.deleteAll();
@@ -36,4 +41,34 @@ public class JogadorControler {
 		return jogServ.getJogadorByName(nome);
 	}
 	
+	public void createAndUpdateIndexes() throws InterruptedException {
+		jogSearch.createIndex();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List searchJogadoresByName(String text){
+		return jogSearch.exactSearch(text);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List searchJogadoresByLike(String text){
+		return jogSearch.likeSearch(text);
+	}
+	
+	
+}
+
+@Configuration
+@ImportResource("applicationContext.xml")
+class Config {
+	
+	@Bean
+	public JogadorService jogadorService(){
+		return new JogadorService();
+	}
+	
+	@Bean
+	public JogadorSearch jogadorSearch(){
+		return new JogadorSearch();
+	}
 }
