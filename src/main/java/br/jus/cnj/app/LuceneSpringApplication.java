@@ -20,11 +20,11 @@ public class LuceneSpringApplication {
 		JogCtrl.addJogador("LÉO MOURA",JogadorInfo.REAL,2.4F,"SPORT","BOTAFOGO",2);	    
 		JogCtrl.addJogador("GRAFITE",JogadorInfo.REAL,5.7F,"FLAMENTO","SANTA CRUZ",5);	    
 		JogCtrl.addJogador("CARLOS EDUARDO",JogadorInfo.REAL,2.8F,"BRASILIENSE","SANTA CRUZ",7);
-			
-		*/
-		//JogCtrl.createAndUpdateIndexes();
+		*/	
 		
-		//System.out.println(JogCtrl.searchJogadoresByName("NORBERTO"));
+		JogCtrl.createAndUpdateIndexes();
+		
+		System.out.println(JogCtrl.searchJogadoresByName("NORBERTO"));
 		
 		System.out.println(JogCtrl.searchJogadoresByLike("AD"));
 	}

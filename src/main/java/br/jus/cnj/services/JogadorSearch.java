@@ -32,7 +32,7 @@ public class JogadorSearch {
 		}
 		return ftem;
 	}
-	
+
 	public void createIndex() throws InterruptedException{
 		getFullTextEntityManager().createIndexer(Jogador.class).startAndWait();
 		System.out.println("Indexação terminada!!");
