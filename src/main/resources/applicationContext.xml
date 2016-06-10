@@ -12,6 +12,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
         ">
+  
      
     <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans -->
     <context:component-scan base-package="br.jus.cnj" />
