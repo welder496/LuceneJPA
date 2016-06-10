@@ -79,7 +79,7 @@ public class Jogador implements Serializable {
 	
 	@Override
 	public String toString(){
-		return "Jogador [codigo ="+codigo+" nome="+nome+"]";
+		return "Jogador [codigo ="+codigo+" nome="+nome+"]\n";
 	}
 
 	public String getTimeAdversario() {
