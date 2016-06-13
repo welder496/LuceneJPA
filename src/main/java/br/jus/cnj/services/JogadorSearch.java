@@ -39,11 +39,31 @@ public class JogadorSearch {
 	}
 	
 	@SuppressWarnings("rawtypes")
+	public List containsSearch(String text){
+		QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Jogador.class).get();
+		BooleanJunction<BooleanJunction> bj = qb.bool();		
+		
+		Query query = bj.must(qb.keyword().onField("nome").matching(text.toLowerCase().trim()).createQuery()).createQuery();
+		
+		FullTextQuery jpaQuery = getFullTextEntityManager().createFullTextQuery(query, Jogador.class);
+		
+		List results = jpaQuery.getResultList();
+		
+		return results;		
+	}
+	
+	@SuppressWarnings("rawtypes")
 	public List exactSearch(String text){
 		QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Jogador.class).get();
-		BooleanJunction<BooleanJunction> bj = qb.bool();
+		BooleanJunction<BooleanJunction> bj = qb.bool();		
 		
-		Query query = bj.must(qb.keyword().onField("nome").matching(text).createQuery()).createQuery();
+		String[] strings = text.split(" ");
+		for (String str: strings){
+			Query internalQuery = qb.keyword().onField("nome").matching(str.toLowerCase().trim()).createQuery();
+			bj.must(internalQuery);
+		}
+			
+		Query query = bj.createQuery();		
 		
 		FullTextQuery jpaQuery = getFullTextEntityManager().createFullTextQuery(query, Jogador.class);
 		
@@ -51,19 +71,47 @@ public class JogadorSearch {
 		
 		return results;
 	}
-	
+		
 	@SuppressWarnings("rawtypes")
 	public List likeSearch(String text){
 		QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Jogador.class).get();
 		BooleanJunction<BooleanJunction> bj = qb.bool();
 		
-		Query query = bj.must(qb.keyword().wildcard().onField("nome").matching("*"+text.toLowerCase().trim()+"*").createQuery()).createQuery();
+		String[] strings = text.split(" ");
+		for (String str: strings){
+			Query internalQuery = qb.keyword().wildcard().onField("nome").matching("*"+str.toLowerCase().trim()+"*").createQuery();
+			bj.must(internalQuery);
+		}
+			
+		Query query = bj.createQuery();		
 		
 		FullTextQuery jpaQuery = getFullTextEntityManager().createFullTextQuery(query, Jogador.class);
 		
 		List results = jpaQuery.getResultList();
 		
 		return results;		
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List fuzzySearch(String text){
+		QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Jogador.class).get();
+		BooleanJunction<BooleanJunction> bj = qb.bool();
+		
+		String[] strings = text.split(" ");
+		for (String str: strings){
+			Query internalQuery = qb.keyword().fuzzy().onField("nome").matching("*"+str.toLowerCase().trim()+"*").createQuery();
+			bj.must(internalQuery);
+		}
+			
+		Query query = bj.createQuery();	
+		
+		//Query query = bj.must(qb.keyword().fuzzy().onField("nome").matching(text.toLowerCase().trim()).createQuery()).createQuery();
+		
+		FullTextQuery jpaQuery = getFullTextEntityManager().createFullTextQuery(query, Jogador.class);
+		
+		List results = jpaQuery.getResultList();
+		
+		return results;				
 	}
 	
 }

@@ -46,6 +46,11 @@ public class JogadorControler {
 	}
 	
 	@SuppressWarnings("rawtypes")
+	public List searchJogadoresContainsName(String text){
+		return jogSearch.containsSearch(text);
+	}
+	
+	@SuppressWarnings("rawtypes")
 	public List searchJogadoresByName(String text){
 		return jogSearch.exactSearch(text);
 	}
@@ -55,6 +60,10 @@ public class JogadorControler {
 		return jogSearch.likeSearch(text);
 	}
 	
+	@SuppressWarnings("rawtypes")
+	public List searchJogadoresFuzzyName(String text){
+		return jogSearch.fuzzySearch(text);
+	}
 	
 }
 
