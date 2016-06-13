@@ -43,6 +43,7 @@ public class Jogador implements Serializable {
 	
 	private int rodada;
 	
+	@Field
 	@Column(length=30)
 	@Enumerated(EnumType.STRING)
 	private JogadorInfo jogadorInfo;
@@ -81,7 +82,7 @@ public class Jogador implements Serializable {
 	
 	@Override
 	public String toString(){
-		return "Jogador [codigo ="+codigo+" nome="+nome+"]\n";
+		return "Jogador [codigo ="+codigo+" nome="+nome+" info ="+jogadorInfo+"]\n";
 	}
 
 	public String getTimeAdversario() {

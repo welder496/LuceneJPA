@@ -65,6 +65,16 @@ public class JogadorControler {
 		return jogSearch.fuzzySearch(text);
 	}
 	
+	@SuppressWarnings("rawtypes")
+	public List searchAll(String text){
+		return jogSearch.allSearch(text);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List searchAllNomeAndInfo(String text, JogadorInfo info){
+		return jogSearch.allSearchNameAndInfo(text, info);
+	}
+	
 }
 
 @Configuration

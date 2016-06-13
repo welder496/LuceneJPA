@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.jpa.FullTextEntityManager;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.jus.cnj.model.Jogador;
+import br.jus.cnj.model.JogadorInfo;
 
 @Repository
 @Transactional
@@ -42,9 +45,15 @@ public class JogadorSearch {
 	public List containsSearch(String text){
 		QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Jogador.class).get();
 		BooleanJunction<BooleanJunction> bj = qb.bool();		
-		
-		Query query = bj.must(qb.keyword().onField("nome").matching(text.toLowerCase().trim()).createQuery()).createQuery();
-		
+			
+		String[] strings = text.split(" ");
+		for (String str: strings){
+			Query internalQuery = qb.keyword().onField("nome").matching(str.toLowerCase().trim()).createQuery();
+			bj.must(internalQuery);
+		}
+			
+		Query query = bj.createQuery();		
+				
 		FullTextQuery jpaQuery = getFullTextEntityManager().createFullTextQuery(query, Jogador.class);
 		
 		List results = jpaQuery.getResultList();
@@ -99,19 +108,81 @@ public class JogadorSearch {
 		
 		String[] strings = text.split(" ");
 		for (String str: strings){
-			Query internalQuery = qb.keyword().fuzzy().onField("nome").matching("*"+str.toLowerCase().trim()+"*").createQuery();
+			Query internalQuery = qb.keyword().fuzzy().onField("nome").matching(str.toLowerCase().trim()).createQuery();
 			bj.must(internalQuery);
 		}
 			
 		Query query = bj.createQuery();	
-		
-		//Query query = bj.must(qb.keyword().fuzzy().onField("nome").matching(text.toLowerCase().trim()).createQuery()).createQuery();
 		
 		FullTextQuery jpaQuery = getFullTextEntityManager().createFullTextQuery(query, Jogador.class);
 		
 		List results = jpaQuery.getResultList();
 		
 		return results;				
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List allSearch(String text){
+		QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Jogador.class).get();
+		BooleanJunction<BooleanJunction> bj = qb.bool();
+		
+		String[] strings = text.split(" ");
+		for (String str: strings){
+			Query internalQuery = qb.keyword().onField("nome").matching(str.toLowerCase().trim()).createQuery();
+			bj.should(internalQuery);
+		}		
+		for (String str: strings){
+			Query internalQuery = qb.keyword().wildcard().onField("nome").matching("*"+str.toLowerCase().trim()+"*").createQuery();
+			bj.should(internalQuery);
+		}		
+		for (String str: strings){
+			Query internalQuery = qb.keyword().fuzzy().onField("nome").matching(str.toLowerCase().trim()).createQuery();
+			bj.should(internalQuery);
+		}
+			
+		Query query = bj.createQuery();	
+		
+		FullTextQuery jpaQuery = getFullTextEntityManager().createFullTextQuery(query, Jogador.class);
+		
+		List results = jpaQuery.getResultList();
+		
+		return results;				
+		
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List allSearchNameAndInfo(String text, JogadorInfo info){
+		QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Jogador.class).get();
+		
+		BooleanJunction<BooleanJunction> bjOne = qb.bool();	
+		String[] strings = text.split(" ");
+		for (String str: strings){
+			Query internalQuery = qb.keyword().onField("nome").matching(str.toLowerCase().trim()).createQuery();
+			bjOne.should(internalQuery);
+		}		
+		for (String str: strings){
+			Query internalQuery = qb.keyword().wildcard().onField("nome").matching("*"+str.toLowerCase().trim()+"*").createQuery();
+			bjOne.should(internalQuery);
+		}		
+		for (String str: strings){
+			Query internalQuery = qb.keyword().fuzzy().onField("nome").matching(str.toLowerCase().trim()).createQuery();
+			bjOne.should(internalQuery);
+		}
+			
+		Query queryOne = bjOne.createQuery();
+				
+		Query queryTwo = qb.keyword().onField("jogadorInfo").matching(info).createQuery();
+		
+		BooleanQuery bq = new BooleanQuery();
+		bq.add(new BooleanClause(queryOne, BooleanClause.Occur.MUST));
+		bq.add(new BooleanClause(queryTwo, BooleanClause.Occur.MUST));
+		
+		FullTextQuery jpaQuery = getFullTextEntityManager().createFullTextQuery(bq, Jogador.class);
+		
+		List results = jpaQuery.getResultList();
+		
+		return results;				
+		
 	}
 	
 }
