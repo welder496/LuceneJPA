@@ -25,7 +25,7 @@ public class LuceneSpringApplication {
 		JogCtrl.addJogador("DIEGO PASTALIERE",JogadorInfo.LESÃO,2.4F,"FLORMINENSE","BOTAFOGO",2);		
 		JogCtrl.addJogador("MIEGO KASTALIERE",JogadorInfo.LESÃO,2.4F,"FLUMINENSE","BOTAFOGO",2);
 		JogCtrl.addJogador("YEGO SIRILIERE",JogadorInfo.LESÃO,2.4F,"FLUMINENSE","BOTAFOGO",2);		
-		JogCtrl.addJogador("GRAFITE",JogadorInfo.JOGANDO,5.7F,"FLAMENTO","SANTA CRUZ",5);	    
+		JogCtrl.addJogador("GRAFITE",JogadorInfo.JOGANDO,5.7F,"FLAMENGO","SANTA CRUZ",5);	    
 		JogCtrl.addJogador("CARLOS EDUARDO",JogadorInfo.RESERVA,2.8F,"BRASILIENSE","SANTA CRUZ",7);
 		JogCtrl.addJogador("CARLOS GOMES",JogadorInfo.SUSPENSO,2.8F,"BRASILIENSE","SANTA CRUZ",7);
 		JogCtrl.addJogador("LUCAS GOMES",JogadorInfo.JOGANDO,7.2F,"RIO VERDENSE","LUVERSENDE", 8);
@@ -35,6 +35,9 @@ public class LuceneSpringApplication {
 		JogCtrl.addJogador("OSMAR LUCKS",JogadorInfo.JOGANDO,5.2F,"ATLÉTICO-GO","JATAIENSE", 10);
 		JogCtrl.addJogador("CARILOS ORTEGA",JogadorInfo.SUSPENSO,5.2F,"INTERNACIONAL","GRÊMIO", 10);
 		JogCtrl.addJogador("CHATITO ORTIEGA",JogadorInfo.SUSPENSO,5.2F,"CHAPECOENSE","GRÊMIO", 10);
+		JogCtrl.addJogador("FÁBIO",JogadorInfo.JOGANDO,5.2F,"ATLÉTICO-GO","JATAIENSE", 10);
+		JogCtrl.addJogador("PHÁBIO ORTEGA",JogadorInfo.JOGANDO,5.2F,"INTERNACIONAL","GRÊMIO", 10);
+		JogCtrl.addJogador("FÁBHIO ORTIEGA",JogadorInfo.JOGANDO,5.2F,"CHAPECOENSE","GRÊMIO", 10);
 		
 		
 		
@@ -57,8 +60,8 @@ public class LuceneSpringApplication {
 		System.out.println(JogCtrl.searchAll("NORIEGA"));
 		*/
 		
-		System.out.println("Com o nome parecido ou que contenha e com determinada situação");
-		System.out.println(JogCtrl.searchAllNomeAndInfo("CAV", JogadorInfo.LESÃO));
+		System.out.println("Com o nome parecido ou que contenha trecho e com determinada situação");
+		System.out.println(JogCtrl.searchAllNomeAndInfo("FÁBIO ORTEGA", JogadorInfo.JOGANDO));
 	}
 	
 
